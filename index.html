@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Message App Demo</title>
+	<style>
+		#Message{
+			text-align: center;
+			width: 300px;
+			height: 40px;
+			border: 1px solid lightblue;
+		}
+		button{
+			padding: 10px;
+		    background: lightblue;
+		    border: none;
+		    color: #494846;
+		    border-radius: 10px;
+		}
+		.messageAPP{
+			margin: 0 auto;
+			width: 1000px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<section class="messageAPP">
+		<p>Send a live app notefaction from the browser!</p>
+		<p>Use the fields below</p>
+		<textarea name="message" id="Message" cols="30" rows="10" placeholder="Message Here"></textarea> <br>
+		<button id="sendMessage">Send Message</button>
+	</section>
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+	<script type="text/javascript">
+		$( "#sendMessage" ).click(function() {
+		    var message = document.getElementById('Message');
+		 	var data3 = {
+			  "data": message.value
+			}
+			$.ajax({
+			  type: "POST",
+			  crossDomain: true,
+			  url: "http://ringcentral.valcom.com:5000/save",
+			  data: data3,
+			  success: function(msg) {
+			    message.value = '';
+			    alert(msg.message);
+			  }
+			});		
+		});
+	</script>
+</body>
+</html>
